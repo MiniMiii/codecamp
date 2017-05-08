@@ -6,6 +6,7 @@
       or die('Fehler beim Verbinden mit dem Datenbank-Server.');
     mysqli_set_charset($db, "utf8");
     return $db;
+    echo "fuck you";
   }
 
   function get_result($sql)
@@ -27,6 +28,13 @@
     return $result;
   }
 
+
+
+  function get_event_list($event_id)
+  {
+    $sql = "SELECT * FROM event;";
+    return get_result($sql);
+  }
 
 
 ?>

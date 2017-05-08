@@ -4,6 +4,7 @@ require_once('system/data.php');
 require_once('system/security.php');
 
 
+$event_list = get_event_list($event_id);
 
 
 
@@ -34,7 +35,7 @@ require_once('system/security.php');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">MusicInCH</a>
+              <a class="navbar-brand" href="#">MusicInCH test</a>
             </div>
             <div class="collapse navbar-collapse" id="lauraMenu">
               <ul class="nav navbar-nav navbar-right navbar-border">
@@ -127,30 +128,17 @@ require_once('system/security.php');
                 </div>
 
             </form>
-                  <?php
-                  $dbname = '302672_5_1';
-
-                  if (!mysql_connect('localhost', '302672_5_1', 'b8xBcXYrs6uH')) {
-                      echo 'Konnte nicht zu mysql verbinden';
-                      exit;
-                  }
-
-                  $sql = "SHOW TABLES FROM $dbname";
-                  $result = mysql_query($sql);
-
-                  if (!$result) {
-                      echo "DB Fehler, konnte Tabellen nicht auflisten\n";
-                      echo 'MySQL Fehler: ' . mysql_error();
-                      exit;
-                  }
-
-                  while ($row = mysql_fetch_row($result)) {
-                      echo "Tabelle: {$row[0]}\n";
-                  }
-
-                  mysql_free_result($result);
-                  ?>
-
+            <div id="event_list">
+              <div class="event_list" data-toggle="buttons" >
+                <ul>
+                                <?php while($event = mysqli_fetch_assoc($event_list)) { ?>
+                                    <li class="event_list_label">
+                                       <?php echo $event['freitext'] . " " . $event['kanton']; ?>
+                                    </li>
+                                <?php } ?>
+                              </ul>
+                              </div>
+                              </div>
             </div>
 
         </div>
