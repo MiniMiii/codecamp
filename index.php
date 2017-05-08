@@ -127,16 +127,19 @@ require_once('system/security.php');
                 </div>
 
             </form>
-            <div class ="row">
-              <?php while ($event = mysqli_fetch_assoc($event_list))
-              {
-                echo "<tr>";
-                echo "<td>",$row->url,"</td>";
-                echo "<td>",$row->urlname,"</td>";
-                echo "</tr>";
-              }
-              echo "</table>";
-              ?>
+            <?php while($user = mysqli_fetch_assoc($no_friend_list)) { ?>
+
+                    <!-- Freund+ Button -->
+                      <!-- Die Klasse not_my_friend für AJAX-Requests -->
+                      <div class="btn-group col-xs-12 not_my_friend" data-toggle="buttons" >
+                        <label class="btn btn-default btn-block p42-friend-btn">
+                          <input type="checkbox" name="new_friends[]" autocomplete="off" value="<?php echo $user['user_id']; ?>" >
+                          <span class="glyphicon glyphicon-plus"></span> <?php echo $user['firstname'] . " " . $user['lastname']; ?>
+                        </label>
+                      </div>
+                      <!-- /Freund+ Button -->
+
+              <?php } ?>
             </div>
 
         </div>
