@@ -5,9 +5,15 @@ require_once('system/security.php');
 
 
 $event_list = get_event_list($event_id);
+//
+// if(isset($_POST['del_friends'])){
+//   remove_friends($user_id, $_POST['del_friends']);
+// }
 
+$genre_list = get_genre_list($genre);
 
-
+$text = $_POST['text'];
+echo $text;
 
 ?>
 <!DOCTYPE html>
@@ -35,7 +41,7 @@ $event_list = get_event_list($event_id);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">MusicInCH test</a>
+              <a class="navbar-brand" href="#">MusicInCH</a>
             </div>
             <div class="collapse navbar-collapse" id="lauraMenu">
               <ul class="nav navbar-nav navbar-right navbar-border">
@@ -82,16 +88,16 @@ $event_list = get_event_list($event_id);
   <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
     <div class="container">
         <div class="col-md-4">
-            <form>
+            <form id="form" method="post" action="index.php">
                 <div class="form-group">
                     <p>Freitextsuche</p>
-                    <input type="text" class="form-control" placeholder="Text eintippen">
+                    <input id="text" name="search" type="text" class="form-control" placeholder="Text eintippen">
                     <span class="input-group-btn">
                     </span>
                 </div>
                 <div class="form-group">
                     <label for="filterKanton">Kanton wählen</label>
-                        <select class="form-control">
+                        <select id="select" name="select" class="form-control">
                           <option value="0" selected>Alle Veranstaltungen</option>
                           <option value="1">Schaffhausen</option>
                           <option value="2">Graubünden</option>
@@ -101,12 +107,12 @@ $event_list = get_event_list($event_id);
                 </div>
                 <div class="form-group">
                     <label for="filterGenre">Genre wählen</label>
-                        <select class="form-control">
-                          <option value="0" selected>Alle Genres</option>
-                          <option value="1">Rock</option>
-                          <option value="2">Pop</option>
-                          <option value="3">Jazz</option>
-                          <option value="4">Oldies</option>
+                        <select id="genre" name="genre" class="form-control">
+                            <?php while($genre = mysqli_fetch_assoc($genre_list)) { ?>
+                                  <option value="<?php echo $genre['genre_id']; ?>">
+                                      <?php echo $genre['bezeichnung']; ?>
+                                  </option>
+                                <?php  } ?>
                         </select>
                 </div>
 
@@ -115,7 +121,7 @@ $event_list = get_event_list($event_id);
                     <label for="filterDate">Datum wählen</label>
                         <select class="form-control">
                           <option value="0" selected>Alle Daten</option>
-                          <option value="1">11. 05</option>
+                          <option value="1">11.05.</option>
                           <option value="2">15.05</option>
                           <option value="3">7.06</option>
                           <option value="4">5.08</option>
@@ -123,22 +129,42 @@ $event_list = get_event_list($event_id);
                    </div>
 
           <div class="form-group"> <!-- Submit button -->
-            <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+            <input id="submit" class="btn btn-primary " name="submit" type="submit">Submit</input>
           </div>
                 </div>
 
             </form>
             <div id="event_list">
+              <div class="col-md-12">
               <div class="event_list" data-toggle="buttons" >
                 <ul>
                                 <?php while($event = mysqli_fetch_assoc($event_list)) { ?>
-                                    <li class="event_list_label">
+                                    <li class="event_list" >
                                        <?php echo $event['freitext'] . " " . $event['kanton']; ?>
-                                    </li>
+                                    </li><br/>
                                 <?php } ?>
                               </ul>
                               </div>
                               </div>
+                </div>
+                <!-- <script type="text/javascript">
+                  $('#form').submit(function() {
+                    if($('#text').val() == "") {
+                      $('#event_list').html("Lade...");
+                    } else {
+                        $.ajax({
+                          type: "GET",
+                          url: "index.php",
+                          data: "search=" + $,
+                          success: function(msg) {
+                            $('#event_list').html(msg);
+                          },
+                        });
+                    }
+                    return false;
+                  });
+                </script> -->
+
             </div>
 
         </div>

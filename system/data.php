@@ -28,13 +28,27 @@
     return $result;
   }
 
-
+/************** Auflistungen ***************/
 
   function get_event_list($event_id)
   {
     $sql = "SELECT * FROM event;";
     return get_result($sql);
   }
+
+  function get_genre_list($genre)
+  {
+    $sql = "SELECT bezeichnung FROM genre;";
+    return get_result($sql);
+  }
+
+  // function get_ajax_list($input)
+  // {
+  //   $input = $_POST['genre'];
+  //   $sql = "SELECT * FROM event WHERE genre = $input;";
+  //   return get_result($sql);
+  // }
+
 
 
 ?>
