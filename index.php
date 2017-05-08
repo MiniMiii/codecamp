@@ -127,19 +127,30 @@ require_once('system/security.php');
                 </div>
 
             </form>
-            <?php while($user = mysqli_fetch_assoc($no_friend_list)) { ?>
+                  <?php
+                  $dbname = '302672_5_1';
 
-                    <!-- Freund+ Button -->
-                      <!-- Die Klasse not_my_friend für AJAX-Requests -->
-                      <div class="btn-group col-xs-12 not_my_friend" data-toggle="buttons" >
-                        <label class="btn btn-default btn-block p42-friend-btn">
-                          <input type="checkbox" name="new_friends[]" autocomplete="off" value="<?php echo $user['user_id']; ?>" >
-                          <span class="glyphicon glyphicon-plus"></span> <?php echo $user['firstname'] . " " . $user['lastname']; ?>
-                        </label>
-                      </div>
-                      <!-- /Freund+ Button -->
+                  if (!mysql_connect('localhost', '302672_5_1', 'b8xBcXYrs6uH')) {
+                      echo 'Konnte nicht zu mysql verbinden';
+                      exit;
+                  }
 
-              <?php } ?>
+                  $sql = "SHOW TABLES FROM $dbname";
+                  $result = mysql_query($sql);
+
+                  if (!$result) {
+                      echo "DB Fehler, konnte Tabellen nicht auflisten\n";
+                      echo 'MySQL Fehler: ' . mysql_error();
+                      exit;
+                  }
+
+                  while ($row = mysql_fetch_row($result)) {
+                      echo "Tabelle: {$row[0]}\n";
+                  }
+
+                  mysql_free_result($result);
+                  ?>
+
             </div>
 
         </div>
