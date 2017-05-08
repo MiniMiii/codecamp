@@ -127,6 +127,18 @@ require_once('system/security.php');
                 </div>
 
             </form>
+            <div class ="row">
+              <?php while ($event = mysqli_fetch_assoc($event_list))
+              {
+                echo "<tr>";
+                echo "<td>",$row->url,"</td>";
+                echo "<td>",$row->urlname,"</td>";
+                echo "</tr>";
+              }
+              echo "</table>";
+              ?>
+            </div>
+
         </div>
     </div>
   </section>
