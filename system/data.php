@@ -42,13 +42,6 @@
     return get_result($sql);
   }
 
-  // function get_ajax_list($input)
-  // {
-  //   $input = $_POST['genre'];
-  //   $sql = "SELECT * FROM event WHERE genre = $input;";
-  //   return get_result($sql);
-  // }
-
 
 
 ?>

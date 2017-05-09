@@ -91,7 +91,7 @@ echo $text;
             <form id="form" method="post" action="index.php">
                 <div class="form-group">
                     <p>Freitextsuche</p>
-                    <input id="text" name="search" type="text" class="form-control" placeholder="Text eintippen">
+                    <input id="text" name="text" type="text" class="form-control" placeholder="Text eintippen">
                     <span class="input-group-btn">
                     </span>
                 </div>
@@ -147,23 +147,6 @@ echo $text;
                               </div>
                               </div>
                 </div>
-                <!-- <script type="text/javascript">
-                  $('#form').submit(function() {
-                    if($('#text').val() == "") {
-                      $('#event_list').html("Lade...");
-                    } else {
-                        $.ajax({
-                          type: "GET",
-                          url: "index.php",
-                          data: "search=" + $,
-                          success: function(msg) {
-                            $('#event_list').html(msg);
-                          },
-                        });
-                    }
-                    return false;
-                  });
-                </script> -->
 
             </div>
 
